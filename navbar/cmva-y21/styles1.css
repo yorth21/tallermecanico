@@ -1,0 +1,147 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+    padding: 120px 20px 0;
+}
+
+.header {
+    background-color: #ffffdd;
+    height: 120px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 10px 50px;
+}
+
+.logo img {
+    height: 100px;
+    width: auto;
+    line-height: 100px;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+
+    margin: 0 auto;
+}
+
+.nav-link {
+    color: black;
+    text-decoration: none;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+}
+
+.nav-menu-item {
+    font-size: 20px;
+    margin: 0 10px;
+    line-height: 100px;
+    text-transform: uppercase;
+    width: max-content;
+}
+
+.nav-menu-link {
+    padding: 8px 12px;
+    border-radius: 10px;
+}
+
+.nav-menu-link:hover,
+.nav-menu-link_active  {
+    background-color: #fffd1d;
+    transition: 0.5s;
+}
+
+/* menu hambuergesa */
+
+.nav-toggle {
+    color: #111;
+    background: none;
+    border: none;
+    font-size: 30px;
+    padding: 0 20px;
+    line-height: 80px;
+    cursor: pointer;
+
+    display: none;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+    body {
+        padding-top: 100px;
+    }
+
+    .header {
+        height: 100px;
+        width: 100%;
+        padding: 5px 20px;
+    }
+
+    .logo img {
+        height: 90px;
+        width: auto;
+        line-height: 90px;
+    }
+
+    .nav {
+        display: flex;
+        justify-content: space-between;
+
+        margin: 0 auto;
+    }
+
+    .nav-link {
+        color: black;
+        text-decoration: none;
+    }
+
+    .nav-menu {
+        flex-direction: column;
+        align-items: center;
+        margin-right: 20px;
+        background-color: #2e3c50;
+        position: fixed;
+        left: 0;
+        top: 100px;
+        width: 100%;
+        padding: 20px 0;
+        height: calc(100% - 100px);
+        overflow-y: auto;
+
+        left: 100%;
+        transition: left .3s;
+    }
+
+    .nav-menu-item {
+        line-height: 90px;
+    }
+
+    .nav-menu-link:hover,
+    .nav-menu-link_active {
+        background: none;
+        color: #83c5f7;
+    }
+
+    .nav-toggle {
+        display: block;
+    }
+
+    .nav-menu_visible {
+        left: 0;
+    }
+
+    .nav-toggle:focus:not(:focus-visible) {
+        outline: none;
+    }
+
+}
