@@ -19,7 +19,7 @@
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="<?php echo base_url; ?>Inicio">CMVA</a>
+            <a class="navbar-brand ps-3" href="<?php echo base_url; ?>Inicio">Yorth21</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar-->
@@ -48,9 +48,12 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
                                 Inicio
                             </a>
+                            <div id="admin">
+                                <!-- menu administracion -->
+                            </div>
                             <a class="nav-link collapsed" href="<?php echo base_url; ?>Buzon" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-envelope"></i></div>
-                                Buzon
+                                Empleados
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
@@ -58,9 +61,6 @@
                                     <a class="nav-link" href="<?php echo base_url; ?>Buzon/nueva"><i class="fas fa-plus m-2"></i> Nueva</a>
                                     <a class="nav-link" href="<?php echo base_url; ?>Buzon/seguimiento"><i class="fas fa-tasks m-2"></i> Seguimiento</a>
                                 </nav>
-                            </div>
-                            <div id="admin">
-                                <!-- menu administracion -->
                             </div>
                         </div>
                     </div>
