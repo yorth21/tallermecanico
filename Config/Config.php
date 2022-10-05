@@ -4,7 +4,7 @@
     const host = "localhost";
     const user = "root";
     const pass = "";
-    const db = "tallermecanico";
+    const db = "tallermecanicodb";
     const chatset = "charset=utf8";
 
 ?>

@@ -27,6 +27,16 @@
             $this->session();
             $this->views->getView($this, "empleados");
         }
+        
+        public function mostrarEmpleado($cedula){
+            $this->session();
+            
+            $data = $this->model->getEmpleado($cedula);
+            $this->views->getView($this, "mostrarEmpleado", $data);
+        }
+
+
+
         public function listarEmpleados()
         {
             $this->session();
@@ -53,7 +63,7 @@
 
                 $data[$i]['acciones'] = '<div>
                                             <a class="btn btn-warning" href="'.base_url.'Admin/editarEmpleado/'.$data[$i]['cedula'].'" title="Editar"><i class="fas fa-edit"></i></a>
-                                            <a class="btn btn-primary" href="'.base_url.'Admin/verSolicitud/'.$data[$i]['cedula'].'" title="Ver"><i class="fas fa-clipboard-list"></i></a>
+                                            <a class="btn btn-primary" href="'.base_url.'Admin/mostrarEmpleado/'.$data[$i]['cedula'].'" title="Ver"><i class="fas fa-clipboard-list"></i></a>
                                             <a class="btn btn-'.$btnColor.'" href="'.base_url.'Buzon/verSolicitud/'.$data[$i]['cedula'].'" title="'.$btnMsj.'"><i class="fas fa-'.$icon.'"></i></a>
                                         </div>';
             }
