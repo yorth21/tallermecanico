@@ -27,15 +27,13 @@
             $this->session();
             $this->views->getView($this, "empleados");
         }
-        
-        public function mostrarEmpleado($cedula){
+
+        public function mostrarEmpleado($cedula)
+        {
             $this->session();
-            
             $data = $this->model->getEmpleado($cedula);
             $this->views->getView($this, "mostrarEmpleado", $data);
         }
-
-
 
         public function listarEmpleados()
         {

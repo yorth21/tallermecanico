@@ -10,8 +10,10 @@
 
         public function verPermiso(string $cedula)
         {
-            $sql = "SELECT r.rol FROM detallesrol dr JOIN roles r ON dr.rol=r.id
-                    WHERE cedula = $cedula AND dr.estado=1";
+            $sql = "SELECT r.rol FROM detallesrol dr
+                    JOIN roles r ON dr.rol=r.id
+                    JOIN usuarios u USING(cedula)
+                    WHERE cedula = $cedula AND u.estado=1";
             $data = $this->select($sql);
             return $data;
         }
