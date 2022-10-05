@@ -51,13 +51,7 @@
         public function nameUser()
         {
             $this->session();
-            $cedula = $_SESSION['cedula'];
-            $nameUser = $this->model->nameUser($cedula);
-            if (!empty($nameUser)) {
-                $data = $nameUser['nombres'].' ';
-            } else {
-                $data = '';
-            }
+            $data = $_SESSION['nombres'].' ';
 
             echo $data;
             die();
