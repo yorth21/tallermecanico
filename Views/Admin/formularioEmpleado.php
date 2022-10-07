@@ -128,8 +128,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <button class="btn btn-success" type="button">Registrar</button>
+                <div class="row d-flex justify-content-center">
+                    <div class="col-3 d-flex justify-content-center">
+                        <button class="btn btn-primary" type="button">Registrar</button>
+                    </div>
                 </div>
             </div>
         </div>
