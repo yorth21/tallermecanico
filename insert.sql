@@ -1184,11 +1184,11 @@ INSERT INTO `tipostrabajos` (`id`, `tipotrabajo`, `estado`) VALUES
 
 -- Clientes
 
-insert into clientes (cedula, nombres, apellidos, direccion, telefono, email, idmunicipio, fechanac) values ('33093429852', 'Storm', 'Pallasch', '7327', '3351921526', 'spallasch0@github.io', '95200', '1977-04-13');
-insert into clientes (cedula, nombres, apellidos, direccion, telefono, email, idmunicipio, fechanac) values ('62209251115', 'Sisile', 'Popham', '89', '9963388673', 'spopham1@deviantart.com', '99624', '2002-05-21');
-insert into clientes (cedula, nombres, apellidos, direccion, telefono, email, idmunicipio, fechanac) values ('89065643028', 'Rafael', 'Neasam', '5619', '2231690904', 'rneasam2@skype.com', '94001', '2001-07-12');
-insert into clientes (cedula, nombres, apellidos, direccion, telefono, email, idmunicipio, fechanac) values ('95041678030', 'Lynnea', 'Kohring', '0422', '3793226306', 'lkohring3@tripadvisor.com', '86571', '1931-12-31');
-insert into clientes (cedula, nombres, apellidos, direccion, telefono, email, idmunicipio, fechanac) values ('98793235736', 'Ricca', 'Ropking', '9947', '4386547455', 'rropking4@google.com.br', '97161', '1956-08-09');
+insert into `clientes` (`cedula`, `nombres`, `apellidos`, `direccion`, `telefono`, `email`, `idmunicipio`, `fechanac`) values ('33093429852', 'Storm', 'Pallasch', '7327', '3351921526', 'spallasch0@github.io', '95200', '1977-04-13');
+insert into `clientes` (`cedula`, `nombres`, `apellidos`, `direccion`, `telefono`, `email`, `idmunicipio`, `fechanac`) values ('62209251115', 'Sisile', 'Popham', '89', '9963388673', 'spopham1@deviantart.com', '99624', '2002-05-21');
+insert into `clientes` (`cedula`, `nombres`, `apellidos`, `direccion`, `telefono`, `email`, `idmunicipio`, `fechanac`) values ('89065643028', 'Rafael', 'Neasam', '5619', '2231690904', 'rneasam2@skype.com', '94001', '2001-07-12');
+insert into `clientes` (`cedula`, `nombres`, `apellidos`, `direccion`, `telefono`, `email`, `idmunicipio`, `fechanac`) values ('95041678030', 'Lynnea', 'Kohring', '0422', '3793226306', 'lkohring3@tripadvisor.com', '86571', '1931-12-31');
+insert into `clientes` (`cedula`, `nombres`, `apellidos`, `direccion`, `telefono`, `email`, `idmunicipio`, `fechanac`) values ('98793235736', 'Ricca', 'Ropking', '9947', '4386547455', 'rropking4@google.com.br', '97161', '1956-08-09');
 
 -- Categoria producto
 
@@ -1198,7 +1198,7 @@ INSERT INTO `cat_producto` (`id`, `categoria`, `eatado`) VALUES
 
 -- Formas de pago
 
-INSERT INTO formaspago(id, formapago) VALUES (1, 'Contado'),(2, 'Credito');
+INSERT INTO `formaspago`(`id`, `formapago`) VALUES (1, 'Contado'),(2, 'Credito');
 
 -- Productos basicos
 
@@ -1223,3 +1223,9 @@ INSERT INTO `productos` (`codigo`, `nombre`, `categoria`, `fechaingreso`, `preci
 ('92966', 'Vagram', 1, '2022-01-13', 2807287, 3082199, 179),
 ('97326', 'Duobam', 2, '2016-08-07', 1152457, 372883, 315),
 ('98321', 'Zamit', 2, '2021-12-01', 3130642, 79907, 155);
+
+-- Vehiculos de prueba
+
+INSERT INTO `vehiculos`(`placa`, `modelo`, `color`, `marca`, `observacion`, `propierario`, `tipovehiculo`) VALUES ('ADA-123', '2022', 'rojo', 'renault', 'esta dañado', '33093429852', '2');
+INSERT INTO `vehiculos`(`placa`, `modelo`, `color`, `marca`, `observacion`, `propierario`, `tipovehiculo`) VALUES ('AFW-542', '1998', 'gris', 'chevrolet', 'esta buenisimo', '98793235736', '2');
+INSERT INTO `vehiculos`(`placa`, `modelo`, `color`, `marca`, `observacion`, `propierario`, `tipovehiculo`) VALUES ('GTH-478', '2002', 'verde', 'toyota', 'esta bueno', '89065643028', '3');

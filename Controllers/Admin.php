@@ -72,7 +72,91 @@
         public function formularioEmpleado()
         {
             $this->session();
-            $this->views->getView($this, "formularioEmpleado");
+            $data['departamentos'] = $this->model->getDepartamentos();
+            $data['especialidades'] = $this->model->getEspecialidades();
+            $this->views->getView($this, "formularioEmpleado", $data);
+        }
+
+        public function getMunicipiosDepa(string $iddepto)
+        {
+            $data = $this->model->getMunicipiosDepa($iddepto);
+            $html = "<option value='' selected> Seleccione... </option>";
+            for ($i=0; $i < count($data); $i++) {
+                $html.="<option value='".$data[$i]['idmunicipio']."'>".$data[$i]['municipio']."</option>";
+            }
+            echo $html;
+            die();
+        }
+
+        public function registrarEmpleado()
+        {
+            // obtener fehca_registro
+            date_default_timezone_set("America/Bogota");
+            $fecha_registro = date('Y-m-d');
+
+            $cedula = $_POST['cedula'];
+            $nombres = $_POST['nombres'];
+            $apellidos = $_POST['apellidos'];
+            $direccion = $_POST['direccion'];
+            $telefono = $_POST['telefono'];
+            $email = $_POST['email'];
+            $departamento = $_POST['departamento'];
+            $municipio = $_POST['municipio'];
+            $fechanac = $_POST['fechanac'];
+            $usuario = $_POST['usuario'];
+            $clave = $_POST['clave'];
+            $especialidad = $_POST['especialidad'];
+            $sueldo = $_POST['sueldo'];
+
+            // validar formulario no tenga espacios vacios
+            // validar datos personales
+            if (empty($cedula) || empty($nombres) || empty($apellidos) || empty($direccion) || empty($telefono) || empty($email) || empty($departamento)  || empty($municipio)  || empty($fechanac)  || empty($apellidos) || empty($usuario)  || empty($clave)) {
+                $msg = "Faltan datos personales";
+            } else {
+                // validar cedula y usuario no existan
+                if ($this->validarCedula($cedula) == 1 || $this->validarUsuario($usuario) == 1) {
+                    $msg = "Cedula o usuario ya existen";
+                } else {
+                    // validar datos empleado
+                    if (empty($especialidad) || empty($sueldo) || $sueldo < 0) {
+                        $msg = "Faltan datos empleado";
+                    } else {
+                        $data = $this->model->registrarEmpleado($cedula, $nombres, $apellidos, $direccion, $telefono, $email, $municipio, $fechanac, $usuario, $clave, $fecha_registro, $sueldo, $especialidad);
+                        if ($data == 1) {
+                            $msg = "ok";
+                        } else {
+                            $msg = "error";
+                        }
+                    }
+                }
+            }
+
+            echo $msg;
+            die();
+        }
+
+        public function validarCedula($cedula)
+        {
+            $data = $this->model->buscarCedula($cedula);
+            if (empty($data)) {
+                $res = 0;
+            } else {
+                $res = 1;
+            }
+
+            return $res;
+        }
+
+        public function validarUsuario($usuario)
+        {
+            $data = $this->model->buscarUsuario($usuario);
+            if (empty($data)) {
+                $res = 0;
+            } else {
+                $res = 1;
+            }
+
+            return $res;
         }
 
     }

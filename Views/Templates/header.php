@@ -51,15 +51,64 @@
                             <div id="admin">
                                 <!-- menu administracion -->
                             </div>
-                            <a class="nav-link collapsed" href="<?php echo base_url; ?>Buzon" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-envelope"></i></div>
-                                Empleados
+
+                            <a class="nav-link collapsed" href="<?php echo base_url; ?>Clientes" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-user-friends"></i></div>
+                                Clientes
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="<?php echo base_url; ?>Buzon/nueva"><i class="fas fa-plus m-2"></i> Nueva</a>
-                                    <a class="nav-link" href="<?php echo base_url; ?>Buzon/seguimiento"><i class="fas fa-tasks m-2"></i> Seguimiento</a>
+                                    <a class="nav-link" href="<?php echo base_url; ?>Clientes/formClientes"><i class="fas fa-user-plus m-2"></i> Registrar</a>
+                                    <a class="nav-link" href="<?php echo base_url; ?>Clientes/gestionClientes"><i class="fas fa-user-cog m-2"></i> Gestionar</a>
+                                </nav>
+                            </div>
+
+                            <a class="nav-link collapsed" href="<?php echo base_url; ?>Vehiculos" data-bs-toggle="collapse" data-bs-target="#collapseLayouts2" aria-expanded="false" aria-controls="collapseLayouts2">
+                                <div class="sb-nav-link-icon"><i class="fas fa-car"></i></div>
+                                Vehiculos
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayouts2" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="<?php echo base_url; ?>Vehiculos/formVehiculos"><i class="fas fa-plus m-2"></i> Registrar</a>
+                                    <a class="nav-link" href="<?php echo base_url; ?>Vehiculos/gestionVehiculos"><i class="fas fa-truck-moving m-2"></i> Gestionar</a>
+                                </nav>
+                            </div>
+
+                            <a class="nav-link collapsed" href="<?php echo base_url; ?>Planilla" data-bs-toggle="collapse" data-bs-target="#collapseLayouts3" aria-expanded="false" aria-controls="collapseLayouts3">
+                                <div class="sb-nav-link-icon"><i class="fas fa-clipboard"></i></div>
+                                Planilla ingreso
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayouts3" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="<?php echo base_url; ?>Planilla/formPlanilla"><i class="fas fa-plus m-2"></i> Registrar</a>
+                                    <a class="nav-link" href="<?php echo base_url; ?>Planilla/gestionPlanilla"><i class="fas fa-clipboard-list m-2"></i> Gestionar</a>
+                                </nav>
+                            </div>
+
+                            <a class="nav-link collapsed" href="<?php echo base_url; ?>Productos" data-bs-toggle="collapse" data-bs-target="#collapseLayouts4" aria-expanded="false" aria-controls="collapseLayouts4">
+                                <div class="sb-nav-link-icon"><i class="fas fa-box"></i></div>
+                                Productos
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayouts4" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="<?php echo base_url; ?>Productos/formProductos"><i class="fas fa-parachute-box m-2"></i> Registrar</a>
+                                    <a class="nav-link" href="<?php echo base_url; ?>Productos/gestionProductos"><i class="fas fa-boxes m-2"></i> Gestionar</a>
+                                </nav>
+                            </div>
+
+                            <a class="nav-link collapsed" href="<?php echo base_url; ?>Facturacion" data-bs-toggle="collapse" data-bs-target="#collapseLayouts5" aria-expanded="false" aria-controls="collapseLayouts5">
+                                <div class="sb-nav-link-icon"><i class="fas fa-receipt"></i></div>
+                                Facturacion
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayouts5" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="<?php echo base_url; ?>Facturacion/vistaFacturar"><i class="fas fa-print m-2"></i> Facturar</a>
+                                    <a class="nav-link" href="<?php echo base_url; ?>Facturacion/vistaHistorialFacturas"><i class="fas fa-history m-2"></i> Historial facturas</a>
                                 </nav>
                             </div>
                         </div>

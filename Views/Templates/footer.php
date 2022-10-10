@@ -18,7 +18,16 @@
             const base_url = "<?php echo base_url; ?>";
         </script>
         <script src="<?php echo base_url; ?>Assets/js/sweetalert2.all.min.js"></script>
-        <script src="<?php echo base_url; ?>Assets/js/funciones-auto.js"></script>
-        <script src="<?php echo base_url; ?>Assets/js/funciones.js"></script>
+        <!-- script princiapl -->
+            <!-- Se sube al final del proyecto -->
+
+            <!-- script funciones automaticas -->
+            <script src="<?php echo base_url; ?>Assets/js/funciones-auto.js"></script>
+        <!-- script personalizados -->
+        <script src="<?php echo base_url; ?>Assets/js/script/yesid.js"></script>
+        <script src="<?php echo base_url; ?>Assets/js/script/yorth.js"></script>
+        <script src="<?php echo base_url; ?>Assets/js/script/miler.js"></script>
+        <script src="<?php echo base_url; ?>Assets/js/script/segundo.js"></script>
+        <script src="<?php echo base_url; ?>Assets/js/script/carlos.js"></script>
     </body>
 </html>

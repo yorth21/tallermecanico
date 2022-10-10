@@ -83,8 +83,8 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `tallermecanicodb`.`especialidades` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `especialidad` VARCHAR(20) NOT NULL,
-  `estado` INT(1) NOT NULL DEFAULT 1,
   `tiposvehiculo` INT NOT NULL,
+  `estado` INT(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`, `tiposvehiculo`),
   INDEX `fk_especialidades_tiposvehiculos1_idx` (`tiposvehiculo` ASC) ,
   CONSTRAINT `fk_especialidades_tiposvehiculos1`
@@ -214,8 +214,8 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `tallermecanicodb`.`planillaingresos` (
   `id` INT NOT NULL,
   `cliente` VARCHAR(20) NOT NULL,
-  `fechaingreso` DATE NOT NULL,
-  `fechaentrega` DATE NOT NULL,
+  `fechaingreso` DATETIME NOT NULL,
+  `fechaentrega` DATETIME NULL,
   `placavehiculo` VARCHAR(7) NOT NULL,
   `descripciontrabajo` VARCHAR(45) NOT NULL,
   `observacion` TEXT(1000) NULL,
@@ -258,7 +258,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `tallermecanicodb`.`facturas` (
   `numfactura` INT NOT NULL,
-  `fecha` DATE NOT NULL,
+  `fecha` DATETIME NOT NULL,
   `cajero` VARCHAR(20) NOT NULL,
   `planilla` INT NOT NULL,
   `totalapagar` FLOAT(11,2) NOT NULL,

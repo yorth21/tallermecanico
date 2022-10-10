@@ -64,17 +64,6 @@
             die();
         }
 
-        public function municipios(int $id)
-        {
-            $data = $this->model->getMunicipiosDepa($id);
-            $html = "<option value='' selected> Seleccione </option>";
-            for ($i=0; $i < count($data); $i++) {
-                $html.="<option value='".$data[$i]['idmunicipio']."'>".$data[$i]['nommunicipio']."</option>";
-            }
-            echo $html;
-            die();
-        }
-
         public function registrar()
         {
             date_default_timezone_set("America/Bogota");
