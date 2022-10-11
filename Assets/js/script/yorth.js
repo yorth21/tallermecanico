@@ -34,6 +34,7 @@
 
 function frmRegistrarEmpleado(e) {
     e.preventDefault();
+    const cedula = document.getElementById("cedula");
 
     const url = base_url + "Admin/registrarEmpleado";
     const frm = document.getElementById("frmEmpleado");
@@ -43,6 +44,7 @@ function frmRegistrarEmpleado(e) {
     http.onreadystatechange = function(){
         if (this.readyState == 4 && this.status == 200) {
             const res = this.responseText;
+            console.log(res);
             if (res == "ok") {
                 Swal.fire({
                     icon: 'success',

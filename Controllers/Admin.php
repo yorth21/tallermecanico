@@ -39,6 +39,7 @@
         {
             $this->session();
             $data = $this->model->getEmpleados();
+
             for ($i=0; $i < count($data); $i++) {
                 if ($data[$i]['estado'] == 1) {
                     $color = 'success';
@@ -65,6 +66,7 @@
                                             <a class="btn btn-'.$btnColor.'" href="'.base_url.'Buzon/verSolicitud/'.$data[$i]['cedula'].'" title="'.$btnMsj.'"><i class="fas fa-'.$icon.'"></i></a>
                                         </div>';
             }
+
             echo json_encode($data, JSON_UNESCAPED_UNICODE);
             die();
         }
@@ -114,7 +116,7 @@
                 $msg = "Faltan datos personales";
             } else {
                 // validar cedula y usuario no existan
-                if ($this->validarCedula($cedula) == 1 || $this->validarUsuario($usuario) == 1) {
+                if (!empty($this->model->buscarCedula($cedula)) || !empty($this->model->buscarUsuario($usuario))) {
                     $msg = "Cedula o usuario ya existen";
                 } else {
                     // validar datos empleado
@@ -122,10 +124,11 @@
                         $msg = "Faltan datos empleado";
                     } else {
                         $data = $this->model->registrarEmpleado($cedula, $nombres, $apellidos, $direccion, $telefono, $email, $municipio, $fechanac, $usuario, $clave, $fecha_registro, $sueldo, $especialidad);
-                        if ($data == 1) {
+                        // validar si usuario se registro con exito
+                        if ($data == "ok") {
                             $msg = "ok";
                         } else {
-                            $msg = "error";
+                            $msg = "No se registro el usuario";
                         }
                     }
                 }
@@ -133,30 +136,6 @@
 
             echo $msg;
             die();
-        }
-
-        public function validarCedula($cedula)
-        {
-            $data = $this->model->buscarCedula($cedula);
-            if (empty($data)) {
-                $res = 0;
-            } else {
-                $res = 1;
-            }
-
-            return $res;
-        }
-
-        public function validarUsuario($usuario)
-        {
-            $data = $this->model->buscarUsuario($usuario);
-            if (empty($data)) {
-                $res = 0;
-            } else {
-                $res = 1;
-            }
-
-            return $res;
         }
 
     }
