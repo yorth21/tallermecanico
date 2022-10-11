@@ -82,14 +82,14 @@
         public function buscarCedula($cedula)
         {
             $sql = "SELECT * FROM usuarios WHERE cedula='$cedula'";
-            $data = $this->selectAll($sql);
+            $data = $this->select($sql);
             return $data;
         }
 
         public function buscarUsuario($usuario)
         {
             $sql = "SELECT * FROM usuarios WHERE usuario='$usuario'";
-            $data = $this->selectAll($sql);
+            $data = $this->select($sql);
             return $data;
         }
 
@@ -112,12 +112,44 @@
             $this->sueldo = $sueldo;
             $this->especialidad = $especialidad;
 
-            $sql = "BEGIN;
-                    INSERT INTO usuarios(cedula, nombres, apellidos, direccion, telefono, email, idmunicipio, fechanac, usuario, clave) VALUE(?,?,?,?,?,?,?,?,?,?);
-                    INSERT INTO empleados(cedula, fechaingreso, sueldo, especialidad) VALUES (?,?,?,?);
-                    COMMIT";
-            $datos = array($this->cedula, $this->nombres, $this->apellidos, $this->direccion, $this->telefono, $this->email, $this->municipio, $this->fechanac, $this->usuario, $this->clave, $this->cedula, $this->fechaingreso, $this->sueldo, $this->especialidad);
-            $data = $this->save($sql, $datos);
+            // datos tabla detallesrol
+            $this->rol = 2; // 2 = empleado
+
+            // Iniciar transacion
+            $this->startTransaction();
+
+            // insertar datos tabla usuarios - U = usuarios
+            $sqlU = "INSERT INTO usuarios(cedula, nombres, apellidos, direccion, telefono, email, idmunicipio, fechanac, usuario, clave) VALUES (?,?,?,?,?,?,?,?,?,?)";
+            $datosU = array($this->cedula, $this->nombres, $this->apellidos, $this->direccion, $this->telefono, $this->email, $this->municipio, $this->fechanac, $this->usuario, $this->clave);
+            $dataU = $this->save($sqlU, $datosU);
+            if ($dataU == 1) {
+                 // insertar datos tabla empleados - E = empleados
+                $sqlE = "INSERT INTO empleados(cedula, fechaingreso, sueldo, especialidad) VALUES (?,?,?,?)";
+                $datosE = array($this->cedula, $this->fechaingreso, $this->sueldo, $this->especialidad);
+                $dataE = $this->save($sqlE, $datosE);
+                if ($dataE == 1) {
+                    // insertar datos tabla destallesrol - DR = detallesrol
+                    $sqlDR = "INSERT INTO detallesrol(cedula, rol) VALUES (?,?)";
+                    $datosDR = array($this->cedula, $this->rol);
+                    $dataDR = $this->save($sqlDR, $datosDR);
+                    if ($dataDR == 1) {
+                        $res = $this->submitTransaction(true);
+                    } else{
+                        $res = $this->submitTransaction(false);
+                    }
+                } else {
+                    $res = $this->submitTransaction(false);
+                }
+            } else {
+                $res = $this->submitTransaction(false);
+            }
+
+            // validar si se hizo commit o rollback
+            if ($res == true) {
+                $data = "ok";
+            } else {
+                $data = "error";
+            }
 
             return $data;
         }
