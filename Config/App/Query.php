@@ -27,18 +27,39 @@
             return $data;
         }
 
+        public function startTransaction()
+        {
+            $this->con->beginTransaction();
+        }
+
         public function save(string $sql, array $datos)
         {
-            $this->sql = $sql;
-            $this->datos = $datos;
-            $insert = $this->con->prepare($this->sql);
-            $data = $insert->execute($this->datos);
-            if ($data) {
-                $res = 1;
-            } else {
-                $res = 0;
+            try {
+                $this->sql = $sql;
+                $this->datos = $datos;
+                $insert = $this->con->prepare($this->sql);
+                $insert->execute($this->datos);
+            } catch(PDOException $e) {
+                return 0;
             }
-            return $res;
+
+            return 1;
+        }
+
+        public function submitTransaction($res)
+        {
+            if ($res == true) {
+                try {
+                    $this->con->commit();
+                } catch(PDOException $e) {
+                    $this->con->rollBack();
+                    return false;
+                }
+                return true;
+            } else {
+                $this->con->rollBack();
+                return false;
+            }
         }
 
     }

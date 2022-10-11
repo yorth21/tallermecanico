@@ -116,6 +116,7 @@
                             <label for="especialidad" class="form-label">Especialidad</label>
                             <select class="form-select" aria-label="Default select example" name="especialidad" id="especialidad">
                                 <option value="" selected>Seleccione...</option>
+                                <option value="8">Prueba</option>
                                 <?php foreach ($data['especialidades'] as $row) { ?>
                                     <option value="<?php echo $row['id']; ?>"><?php echo $row['especialidad']; ?></option>
                                 <?php } ?>
