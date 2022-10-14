@@ -2,7 +2,7 @@
 
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="<?php echo base_url; ?>Vehiculos/gestionVehiculos">Vechiculos</a></li>
+            <li class="breadcrumb-item"><a href="<?php echo base_url; ?>Vehiculos/gestionVehiculos">Vehiculos</a></li>
             <li class="breadcrumb-item active" aria-current="page">Formulario</li>
         </ol>
     </nav>
@@ -83,7 +83,7 @@
                 <div class="row">
                     <div class="col-xl-6 col-sm-6">
                         <div class="mb-3">
-                            <label for="observaciones">Observaiones</label>
+                            <label for="observaciones">Observaciones</label>
                             <textarea class="form-control" name="observaciones" id="observaciones" style="height: 100px"  placeholder="Obervaciones"></textarea>
                         </div>
                     </div>
