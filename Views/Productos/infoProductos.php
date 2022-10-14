@@ -34,11 +34,11 @@
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="row">
+<div class="row">
         <div class="col-12 col-md-6 mb-4">
             <div class="card-form p-4">
+		
                 <h4 class="form-title mb-3">
                    <i class="fa-solid fa-file-invoice-dollar"></i>
                     Precio
@@ -71,5 +71,8 @@
             </div>
         </div>
     </div>
+    </div>
+
+    
 
 <?php include "Views/Templates/footer.php"; ?>
