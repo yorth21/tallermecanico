@@ -21,8 +21,6 @@
         <!-- script princiapl -->
             <!-- Se sube al final del proyecto -->
 
-            <!-- script funciones automaticas -->
-            <script src="<?php echo base_url; ?>Assets/js/funciones-auto.js"></script>
         <!-- script personalizados -->
         <script src="<?php echo base_url; ?>Assets/js/script/yesid.js"></script>
         <script src="<?php echo base_url; ?>Assets/js/script/yorth.js"></script>

@@ -45,7 +45,7 @@
                     $color = 'success';
                     $msj = 'Activo';
                     // btn
-                    $icon = 'times';
+                    $icon = 'trash-alt';
                     $btnColor = 'danger';
                     $btnMsj = 'Inactivar';
                 } else {
@@ -58,12 +58,15 @@
 
                 }
 
+                // definir cedula como string para no tener problemas en el javascript
+                $cedula = "'".$data[$i]['cedula']."'";
+
                 $data[$i]['estado'] = '<span class="badge bg-'.$color.'">'.$msj.'</span>';
 
                 $data[$i]['acciones'] = '<div>
                                             <a class="btn btn-warning" href="'.base_url.'Admin/editarEmpleado/'.$data[$i]['cedula'].'" title="Editar"><i class="fas fa-edit"></i></a>
                                             <a class="btn btn-primary" href="'.base_url.'Admin/mostrarEmpleado/'.$data[$i]['cedula'].'" title="Ver"><i class="fas fa-clipboard-list"></i></a>
-                                            <a class="btn btn-'.$btnColor.'" href="'.base_url.'Buzon/verSolicitud/'.$data[$i]['cedula'].'" title="'.$btnMsj.'"><i class="fas fa-'.$icon.'"></i></a>
+                                            <button class="btn btn-'.$btnColor.'" type="button" onclick="btnEliminarEmpleado('.$cedula.');" title="'.$btnMsj.'"><i class="fas fa-'.$icon.'"></i></button>
                                         </div>';
             }
 
@@ -92,6 +95,7 @@
 
         public function registrarEmpleado()
         {
+            $this->session();
             // obtener fehca_registro
             date_default_timezone_set("America/Bogota");
             $fecha_registro = date('Y-m-d');
@@ -135,6 +139,19 @@
             }
 
             echo $msg;
+            die();
+        }
+
+        public function estadoEmpleado(string $cedula)
+        {
+            $this->session();
+            $data = $this->model->getEmpleado($cedula);
+            $estado = $data['estado'];
+            $estado = $estado==1 ? 0 : 1;
+            $data = $this->model->estadoEmpleado($cedula, $estado);
+            $res = $data=='ok' ? 'ok' : 'Error al cambiar de estado';
+
+            echo $res;
             die();
         }
 
