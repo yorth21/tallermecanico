@@ -31,6 +31,7 @@
                     <th>Precio Compra</th>
                     <th>Precio Venta</th>
                     <th>Stock</th>
+                    <th>Estado</th>
                     <th>Acciones</th>
                 </tr>
             </thead>

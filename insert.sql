@@ -1192,7 +1192,7 @@ insert into `clientes` (`cedula`, `nombres`, `apellidos`, `direccion`, `telefono
 
 -- Categoria producto
 
-INSERT INTO `cat_producto` (`id`, `categoria`, `eatado`) VALUES
+INSERT INTO `cat_producto` (`id`, `categoria`, `estado`) VALUES
 (1, 'Repuesto', 1),
 (2, 'Accesorio', 1);
 
@@ -1203,9 +1203,6 @@ INSERT INTO `formaspago`(`id`, `formapago`) VALUES (1, 'Contado'),(2, 'Credito')
 -- Productos basicos
 
 INSERT INTO `productos` (`codigo`, `nombre`, `categoria`, `fechaingreso`, `preciocompra`, `precioventa`, `stock`) VALUES
-('05231', 'Greenlam', 1, '2021-01-17', 2428639, 2696821, 323),
-('06123', 'Cardguard', 2, '2021-12-03', 1351600, 2126345, 321),
-('09242', 'Bamity', 2, '2018-02-14', 925259, 1107450, 79),
 ('19560', 'Veribet', 2, '2017-01-24', 3149107, 3186921, 58),
 ('25221', 'Sonsing', 2, '2022-08-20', 3332654, 1223843, 280),
 ('30181', 'Bigtax', 2, '2021-02-25', 3288496, 1821717, 123),

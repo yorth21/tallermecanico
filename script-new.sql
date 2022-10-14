@@ -171,7 +171,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `tallermecanicodb`.`cat_producto` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `categoria` VARCHAR(20) NOT NULL,
-  `eatado` INT(1) NOT NULL DEFAULT 1,
+  `estado` INT(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -187,6 +187,7 @@ CREATE TABLE IF NOT EXISTS `tallermecanicodb`.`productos` (
   `preciocompra` INT NOT NULL,
   `precioventa` INT NOT NULL,
   `stock` INT NOT NULL DEFAULT 0,
+  `estado` INT(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`codigo`),
   INDEX `fk_productos_cat_producto1_idx` (`categoria` ASC) ,
   CONSTRAINT `fk_productos_cat_producto1`
