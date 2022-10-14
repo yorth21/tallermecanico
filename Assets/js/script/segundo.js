@@ -5,7 +5,7 @@ const expresiones = {
     categoria:/^[1-9]{1}$/,
     precio_compra: /^[0-9]{5,8}$/,
     precio_venta: /^[0-9]{5,8}$/,
-    stock: /^[0-9]{1,4}$/,
+    stock: /^[0-9]{1,4}$/
 }
 
 //definicion del valor de aprobacion de los campos
@@ -148,7 +148,6 @@ function frmRegistrarProducto(e) {
             timer: 3000
         })
     }else{
-        console.log(campos);
         if(campos.codigo==true && campos.categoria==true && campos.nombre==true && campos.stock==true && campos.precio_compra==true && campos.precio_venta==true){
             const url = base_url + "Productos/registrarProducto";
             const frm = document.getElementById("frmProducto");

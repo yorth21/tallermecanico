@@ -38,7 +38,7 @@
 
             // validar formulario no tenga espacios vacios
             // validar datos del producto
-            if (empty($codigo) || empty($nombre) || empty($categoria) || empty($precio_compra) || empty($precio_venta) || $stock="") {
+            if (empty($codigo) || empty($nombre) || empty($categoria) || empty($precio_compra) || empty($precio_venta) || $stock=="") {
                 $msg = "Faltan datos del producto";
             } else {
                 // validar el codigo ya está registrado
