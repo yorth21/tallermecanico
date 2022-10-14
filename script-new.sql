@@ -147,13 +147,13 @@ CREATE TABLE IF NOT EXISTS `tallermecanicodb`.`vehiculos` (
   `marca` VARCHAR(45) NOT NULL,
   `observacion` TEXT(1000) NULL,
   `estado` INT(1) NULL DEFAULT 1,
-  `propierario` VARCHAR(20) NOT NULL,
+  `propietario` VARCHAR(20) NOT NULL,
   `tipovehiculo` INT NOT NULL,
   PRIMARY KEY (`placa`),
-  INDEX `fk_vehiculos_clientes1_idx` (`propierario` ASC) ,
+  INDEX `fk_vehiculos_clientes1_idx` (`propietario` ASC) ,
   INDEX `fk_vehiculos_tiposvehiculos1_idx` (`tipovehiculo` ASC) ,
   CONSTRAINT `fk_vehiculos_clientes1`
-    FOREIGN KEY (`propierario`)
+    FOREIGN KEY (`propietario`)
     REFERENCES `tallermecanicodb`.`clientes` (`cedula`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
@@ -171,7 +171,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `tallermecanicodb`.`cat_producto` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `categoria` VARCHAR(20) NOT NULL,
-  `eatado` INT(1) NOT NULL DEFAULT 1,
+  `estado` INT(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -187,6 +187,7 @@ CREATE TABLE IF NOT EXISTS `tallermecanicodb`.`productos` (
   `preciocompra` INT NOT NULL,
   `precioventa` INT NOT NULL,
   `stock` INT NOT NULL DEFAULT 0,
+  `estado` INT(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`codigo`),
   INDEX `fk_productos_cat_producto1_idx` (`categoria` ASC) ,
   CONSTRAINT `fk_productos_cat_producto1`

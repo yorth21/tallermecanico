@@ -32,7 +32,7 @@
             return $data;
         }
 
-        public function getEmpleado($cedula)
+        public function getEmpleado(string $cedula)
         {
             $sql = "SELECT
                     u.cedula,
@@ -146,6 +146,25 @@
 
             // validar si se hizo commit o rollback
             if ($res == true) {
+                $data = "ok";
+            } else {
+                $data = "error";
+            }
+
+            return $data;
+        }
+
+        public function estadoEmpleado(string $cedula, int $estado)
+        {
+            $this->cedula = $cedula;
+            $this->estado = $estado;
+
+            $sql = "UPDATE usuarios SET estado = ? WHERE cedula = ?";
+            $datos = array($this->estado, $this->cedula);
+            $data = $this->save($sql, $datos);
+
+            // validar si se cumplio la peticion
+            if ($data == 1) {
                 $data = "ok";
             } else {
                 $data = "error";
