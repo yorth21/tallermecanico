@@ -147,7 +147,7 @@ CREATE TABLE IF NOT EXISTS `tallermecanicodb`.`vehiculos` (
   `marca` VARCHAR(45) NOT NULL,
   `observacion` TEXT(1000) NULL,
   `estado` INT(1) NULL DEFAULT 1,
-  `propierario` VARCHAR(20) NOT NULL,
+  `propietario` VARCHAR(20) NOT NULL,
   `tipovehiculo` INT NOT NULL,
   PRIMARY KEY (`placa`),
   INDEX `fk_vehiculos_clientes1_idx` (`propierario` ASC) ,

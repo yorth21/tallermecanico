@@ -1,34 +1,93 @@
-// Validar formulario empleados
+// Menu y perfil de usuario
 
-// function registrarEmpleado(e) {
-//     e.preventDefault();
+$.get(base_url + 'Inicio/menuPermiso', function (res) {
+    $("#admin").html(res);
+});
+
+$.get(base_url + 'Inicio/nameUser', function(res){
+    $("#navbarDropdown").html(res);
+});
+
+// Fin menu
+
+// dataTable
+
+let tblEmpleados;
+document.addEventListener("DOMContentLoaded", function () {
+    tblEmpleados = $('#tblEmpleados').DataTable({
+        "aaSorting": [],
+        language: {
+            url: base_url +'Assets/json/dataTableES.json'
+        },
+        ajax: {
+            url: base_url + 'Admin/listarEmpleados',
+            dataSrc: ''
+        },
+        columns: [
+            {
+                'data': 'cedula'
+            },
+            {
+                'data': 'nombres'
+            },
+            {
+                'data': 'apellidos'
+            },
+            {
+                'data': 'especialidad'
+            },
+            {
+                'data': 'estado'
+            },
+            {
+                'data': 'acciones'
+            }
+        ]
+    });
+});
+
+// Fin dataTable
 
 
-// }
+// Validar fecha
+// Solo permite ingresar una fecha >= a los 18 años
 
-// // Fin validacion formulario
+var myDate = $('#fechanac');
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth() + 1;
+var yyyy = today.getFullYear()-18;
+if(dd < 10)
+    dd = '0' + dd;
 
-// const formulario = document.getElementById('frmEmpleado');
-// const inputs = document.querySelectorAll('#frmEmpleado input');
+if(mm < 10)
+    mm = '0' + mm;
 
-// const expresiones = {
-//     usuario: /^[a-zA-Z0-9\_\-]{4,16}$/, // Letras, numeros, guion y guion_bajo
-//     nombre: /^[a-zA-ZÀ-ÿ\s]{1,30}$/, // Letras y espacios, pueden llevar acentos.
-//     password: /^.{4,12}$/, // 4 a 12 digitos.
-//     correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-//     telefono: /^\d{6,15}$/ // 7 a 14 numeros.
-// }
+today = yyyy + '-' + mm + '-' + dd;
+myDate.attr("max", today);
 
-
-
-
-
-// inputs.forEach((input) => {
-//     input.addEventListener('keyup', validarFormulario);
-//     input.addEventListener('blur', validarFormulario);
-// });
+// Fin validar fecha
 
 
+// Selects referenciados
+
+$(document).ready(function(e){
+    $("#departamento").change(function () {
+        var iddepto = $("#departamento").val();
+        $.ajax({
+            // data: parametros,
+            url: base_url + 'Admin/getMunicipiosDepa/'+iddepto,
+            type: 'post',
+            beforeSend: function () {
+            },
+            success: function (response) {
+                $("#municipio").html(response);
+            }
+        });
+    })
+});
+
+// Fin selects referenciados
 
 // Registrar empleado
 
@@ -44,7 +103,6 @@ function frmRegistrarEmpleado(e) {
     http.onreadystatechange = function(){
         if (this.readyState == 4 && this.status == 200) {
             const res = this.responseText;
-            console.log(res);
             if (res == "ok") {
                 Swal.fire({
                     icon: 'success',
@@ -65,4 +123,45 @@ function frmRegistrarEmpleado(e) {
     }
 }
 
-// Registrar empleado
+// estado empleado
+
+function btnEliminarEmpleado(cedula) {
+    Swal.fire({
+        title: 'Esta seguro?',
+        text: "El usuario "+cedula+" quedara inactivo!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si',
+        cancelButtonText: 'No'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const url = base_url + "Admin/estadoEmpleado/"+cedula;
+            const http = new XMLHttpRequest();
+            http.open("GET", url, true);
+            http.send();
+            http.onreadystatechange = function(){
+                if (this.readyState == 4 && this.status == 200) {
+                    const res = this.responseText;
+                    if (res == "ok") {
+                        Swal.fire(
+                            'Mensaje!',
+                            'Usuario eliminado con exito',
+                            'success'
+                        )
+                        tblEmpleados.ajax.reload();
+                    } else {
+                        Swal.fire(
+                            'Mensaje!',
+                            res,
+                            'error'
+                        )
+                    }
+                }
+            }
+        }
+    })
+}
+
+// Fin estado empleado
