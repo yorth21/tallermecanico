@@ -1223,6 +1223,6 @@ INSERT INTO `productos` (`codigo`, `nombre`, `categoria`, `fechaingreso`, `preci
 
 -- Vehiculos de prueba
 
-INSERT INTO `vehiculos`(`placa`, `modelo`, `color`, `marca`, `observacion`, `propierario`, `tipovehiculo`) VALUES ('ADA-123', '2022', 'rojo', 'renault', 'esta dañado', '33093429852', '2');
-INSERT INTO `vehiculos`(`placa`, `modelo`, `color`, `marca`, `observacion`, `propierario`, `tipovehiculo`) VALUES ('AFW-542', '1998', 'gris', 'chevrolet', 'esta buenisimo', '98793235736', '2');
-INSERT INTO `vehiculos`(`placa`, `modelo`, `color`, `marca`, `observacion`, `propierario`, `tipovehiculo`) VALUES ('GTH-478', '2002', 'verde', 'toyota', 'esta bueno', '89065643028', '3');
+INSERT INTO `vehiculos`(`placa`, `modelo`, `color`, `marca`, `observacion`, `propietario`, `tipovehiculo`) VALUES ('ADA-123', '2022', 'rojo', 'renault', 'esta dañado', '33093429852', '2');
+INSERT INTO `vehiculos`(`placa`, `modelo`, `color`, `marca`, `observacion`, `propietario`, `tipovehiculo`) VALUES ('AFW-542', '1998', 'gris', 'chevrolet', 'esta buenisimo', '98793235736', '2');
+INSERT INTO `vehiculos`(`placa`, `modelo`, `color`, `marca`, `observacion`, `propietario`, `tipovehiculo`) VALUES ('GTH-478', '2002', 'verde', 'toyota', 'esta bueno', '89065643028', '3');

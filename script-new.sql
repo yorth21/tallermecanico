@@ -150,10 +150,10 @@ CREATE TABLE IF NOT EXISTS `tallermecanicodb`.`vehiculos` (
   `propietario` VARCHAR(20) NOT NULL,
   `tipovehiculo` INT NOT NULL,
   PRIMARY KEY (`placa`),
-  INDEX `fk_vehiculos_clientes1_idx` (`propierario` ASC) ,
+  INDEX `fk_vehiculos_clientes1_idx` (`propietario` ASC) ,
   INDEX `fk_vehiculos_tiposvehiculos1_idx` (`tipovehiculo` ASC) ,
   CONSTRAINT `fk_vehiculos_clientes1`
-    FOREIGN KEY (`propierario`)
+    FOREIGN KEY (`propietario`)
     REFERENCES `tallermecanicodb`.`clientes` (`cedula`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
