@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // Buscar vehiculo
 function buscarCliente(e) {
     e.preventDefault();
-    // reiniciar el input y la tabla
+    // mostrar el modal
     $("#buscarCliente").modal("show");
 }
 
@@ -105,7 +105,7 @@ function elegirCliente(cedulaCliente) {
 // Registrar vehiculo
 function frmRegistrarVehiculo(e) {
     e.preventDefault();
-    
+
     validarVehiculo("observaciones");
     console.log(campos2);
 
@@ -206,3 +206,5 @@ const validarVehiculo = (id_campo) => {
         break;
     }
 }
+
+// ----------------------

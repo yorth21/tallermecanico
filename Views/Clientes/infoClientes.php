@@ -1,6 +1,6 @@
 <?php include "Views/Templates/header.php"; ?>
 
-<div class="row">
+    <div class="row">
         <div class="col-12 col-md-6 mb-4">
             <div class="card-form p-4">
                 <h4 class="form-title mb-3">
@@ -11,7 +11,6 @@
                         <label for="idnumber">N° Identificación</label>
                         <p><?php echo $data['cedula'];?></p>
                     </div>
-                   
 
                     <div class="form-group col-6">
                         <label for="name">Nombres</label>
@@ -22,34 +21,13 @@
                         <p><?php echo $data['apellidos'];?></p>
                     </div>
 
-                    
                     <div class="form-group col-6">
                         <label for="birth">Fecha de nacimiento</label>
                         <p><?php echo $data['fechanac'];?></p>
                     </div>
-                    
                 </div>
             </div>
         </div>
-
-    <!-- 
-    $sql = "SELECT
-                    c.cedula,
-                    c.nombres,
-                    c.apellidos,
-                    c.direccion,
-                    c.telefono,
-                    c.email,
-                    c.fechanac,
-                    m.municipio
-                    FROM clientes c
-                    JOIN municipios m ON
-                    c.idmunicipio = m.idmunicipio
-                    WHERE cedula = '$cedula'
-                    ";
-
-
-    -->
 
         <div class="col-12 col-md-6 mb-4">
             <div class="card-form p-4">

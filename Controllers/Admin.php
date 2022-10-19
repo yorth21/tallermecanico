@@ -35,6 +35,23 @@
             $this->views->getView($this, "mostrarEmpleado", $data);
         }
 
+        public function formularioEmpleado()
+        {
+            $this->session();
+            $data['departamentos'] = $this->model->getDepartamentos();
+            $data['especialidades'] = $this->model->getEspecialidades();
+            $this->views->getView($this, "formularioEmpleado", $data);
+        }
+
+        public function formularioEditarEmpleado($cedula)
+        {
+            $this->session();
+            $data['empleado'] = $this->model->getEmpleado($cedula);
+            $data['departamentos'] = $this->model->getDepartamentos();
+            $data['especialidades'] = $this->model->getEspecialidades();
+            $this->views->getView($this, "editEmpleado", $data);
+        }
+
         public function listarEmpleados()
         {
             $this->session();
@@ -64,7 +81,7 @@
                 $data[$i]['estado'] = '<span class="badge bg-'.$color.'">'.$msj.'</span>';
 
                 $data[$i]['acciones'] = '<div>
-                                            <a class="btn btn-warning" href="'.base_url.'Admin/editarEmpleado/'.$data[$i]['cedula'].'" title="Editar"><i class="fas fa-edit"></i></a>
+                                            <a class="btn btn-warning" href="'.base_url.'Admin/formularioEditarEmpleado/'.$data[$i]['cedula'].'" title="Editar"><i class="fas fa-edit"></i></a>
                                             <a class="btn btn-primary" href="'.base_url.'Admin/mostrarEmpleado/'.$data[$i]['cedula'].'" title="Ver"><i class="fas fa-clipboard-list"></i></a>
                                             <button class="btn btn-'.$btnColor.'" type="button" onclick="btnEliminarEmpleado('.$cedula.');" title="'.$btnMsj.'"><i class="fas fa-'.$icon.'"></i></button>
                                         </div>';
@@ -72,14 +89,6 @@
 
             echo json_encode($data, JSON_UNESCAPED_UNICODE);
             die();
-        }
-
-        public function formularioEmpleado()
-        {
-            $this->session();
-            $data['departamentos'] = $this->model->getDepartamentos();
-            $data['especialidades'] = $this->model->getEspecialidades();
-            $this->views->getView($this, "formularioEmpleado", $data);
         }
 
         public function getMunicipiosDepa(string $iddepto)
@@ -152,6 +161,44 @@
             $res = $data=='ok' ? 'ok' : 'Error al cambiar de estado';
 
             echo $res;
+            die();
+        }
+
+        public function editarEmpleado()
+        {
+            $this->session();
+            $cedula = $_POST['cedula'];
+            $nombres = $_POST['nombres'];
+            $apellidos = $_POST['apellidos'];
+            $direccion = $_POST['direccion'];
+            $telefono = $_POST['telefono'];
+            $email = $_POST['email'];
+            $departamento = $_POST['departamento'];
+            $municipio = $_POST['municipio'];
+            $fechanac = $_POST['fechanac'];
+            $usuario = $_POST['usuario'];
+            $clave = $_POST['clave'];
+
+            // validar formulario no tenga espacion vacios
+            if (empty($cedula) || empty($nombres) || empty($apellidos) || empty($direccion) || empty($telefono) || empty($email) || empty($departamento)  || empty($municipio)  || empty($fechanac)  || empty($apellidos) || empty($usuario)  || empty($clave)) {
+                $msg = "Hay campos vacios";
+            } else {
+                // validar que el usuario a modificar exista
+                if (!empty($this->model->buscarCedula($cedula)) || !empty($this->model->buscarUsuario($usuario))) {
+                    // Actualizar el empelado
+                    $data = $this->model->editarEmpleado($cedula, $nombres, $apellidos, $direccion, $telefono, $email, $municipio, $fechanac, $usuario, $clave);
+                    // validar si usuario se registro con exito
+                    if ($data == "ok") {
+                        $msg = "ok";
+                    } else {
+                        $msg = "No se registro el usuario";
+                    }
+                } else {
+                    $msg = "Cedula o usuario no existen";
+                }
+            }
+
+            echo $msg;
             die();
         }
 

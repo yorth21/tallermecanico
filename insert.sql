@@ -1172,7 +1172,7 @@ INSERT INTO `usuarios`(
 'cristian@udenar.edu.co', '52001', '2000-01-01', 'cristian', '1234'
 );
 
-INSERT INTO `empleados`(`cedula`, `fechaingreso`, `sueldo`, `especialidad`) VALUES ('123456789','2000-01-01', 1000000, 1);
+INSERT INTO `empleados`(`cedula`, `fechaingreso`, `sueldo`, `especialidad`) VALUES ('987654321','2000-01-01', 1000000, 1);
 
 INSERT INTO `detallesrol`(`cedula`, `rol`) VALUES ('987654321', 2);
 

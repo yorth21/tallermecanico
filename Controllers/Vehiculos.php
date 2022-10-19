@@ -29,6 +29,13 @@
             $this->views->getView($this, "formVehiculos", $data);
         }
 
+        public function mostrarVehiculo($placa)
+        {
+            $this->session();
+            $data = $this->model->getVehiculo($placa);
+            $this->views->getView($this, "infoVehiculos", $data);
+        }
+
         // Metodos
         public function listarVehiculos()
         {
@@ -92,7 +99,7 @@
                 $cedula = "'".$data[$i]['cedula']."'";
 
                 $datos = $datos.'
-                    <tr onclick="elegirCliente('.$cedula.')">
+                    <tr onclick="elegirCliente('.$cedula.')" style="cursor: pointer">
                         <td>'.$data[$i]['cedula'].'</td>
                         <td>'.$data[$i]['nombres'].'</td>
                         <td>'.$data[$i]['apellidos'].'</td>

@@ -66,6 +66,19 @@ if(mm < 10)
 today = yyyy + '-' + mm + '-' + dd;
 myDate.attr("max", today);
 
+function vlfecha(){
+    var date = myDate.val();
+    if(Date.parse(date)){
+        if(date > today){
+            document.getElementById('fechanac').classList.remove('is-valid');
+            document.getElementById('fechanac').classList.add('is-invalid');
+        } else {
+            document.getElementById('fechanac').classList.add('is-valid');
+            document.getElementById('fechanac').classList.remove('is-invalid');
+        }
+    }
+}
+
 // Fin validar fecha
 
 
@@ -165,3 +178,41 @@ function btnEliminarEmpleado(cedula) {
 }
 
 // Fin estado empleado
+
+
+// Editar datos personales del empleado
+
+function frmEditarEmpleado(e) {
+    e.preventDefault();
+
+    const url = base_url + "Admin/editarEmpleado";
+    const frm = document.getElementById("frmEditarEmpleado");
+    const http = new XMLHttpRequest();
+    http.open("POST", url, true);
+    http.send(new FormData(frm));
+    http.onreadystatechange = function(){
+        if (this.readyState == 4 && this.status == 200) {
+            const res = this.responseText;
+            if (res == "ok") {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Cambios guardados con exito!',
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+                setTimeout(() => {
+                    location.href = base_url + "Admin/empleados"
+                }, 2000);
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: res,
+                    showConfirmButton: false,
+                    timer: 3000
+                })
+            }
+        }
+    }
+}
+
+// editar empleado

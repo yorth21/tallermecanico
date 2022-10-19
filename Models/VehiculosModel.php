@@ -35,8 +35,11 @@
                     v.observacion,
                     v.estado,
                     v.propietario,
-                    tpv.tipovehiculo
+                    tpv.tipovehiculo,
+                    c.nombres,
+                    c.apellidos
                     FROM vehiculos v JOIN tiposvehiculos tpv ON v.tipovehiculo=tpv.id
+                    JOIN clientes c ON c.cedula = v.propietario
                     WHERE v.placa='$placa'";
             $data = $this->select($sql);
             return $data;

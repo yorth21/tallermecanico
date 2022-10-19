@@ -27,7 +27,8 @@
                     JOIN empleados e ON u.cedula=e.cedula
                     JOIN especialidades esp ON e.especialidad=esp.id
                     JOIN detallesrol dr ON u.cedula=dr.cedula
-                    JOIN roles r ON dr.rol=r.id";
+                    JOIN roles r ON dr.rol=r.id
+                    WHERE r.rol='empleado'";
             $data = $this->selectAll($sql);
             return $data;
         }
@@ -42,18 +43,25 @@
                     u.telefono,
                     u.email,
                     u.fechanac,
+                    u.usuario,
+                    u.clave,
                     u.estado,
                     e.fechaingreso,
                     e.sueldo,
                     esp.especialidad,
-                    r.rol
+                    r.rol,
+                    m.idmunicipio,
+                    m.municipio,
+                    d.iddepto,
+                    d.departamento
                     FROM usuarios u
                     JOIN empleados e ON u.cedula=e.cedula
                     JOIN especialidades esp ON e.especialidad=esp.id
                     JOIN detallesrol dr ON u.cedula=dr.cedula
                     JOIN roles r ON dr.rol=r.id
-                    WHERE u.cedula = '$cedula'
-                    ";
+                    JOIN municipios m USING(idmunicipio)
+                    JOIN departamentos d USING(iddepto)
+                    WHERE u.cedula = '$cedula'";
             $data = $this->select($sql);
             return $data;
         }
@@ -164,6 +172,35 @@
             $data = $this->save($sql, $datos);
 
             // validar si se cumplio la peticion
+            if ($data == 1) {
+                $data = "ok";
+            } else {
+                $data = "error";
+            }
+
+            return $data;
+        }
+
+        public function editarEmpleado(string $cedula, string $nombres, string $apellidos, string $direccion, string $telefono, string $email, string $municipio, string $fechanac, string $usuario, string $clave)
+        {
+            // datos tabla usuarios
+            $this->cedula = $cedula;
+            $this->nombres = $nombres;
+            $this->apellidos = $apellidos;
+            $this->direccion = $direccion;
+            $this->telefono = $telefono;
+            $this->email = $email;
+            $this->municipio = $municipio;
+            $this->fechanac = $fechanac;
+            $this->usuario = $usuario;
+            $this->clave = $clave;
+
+            // Actualizar empleado
+            $sql = "UPDATE usuarios SET nombres = ?, apellidos = ?, direccion = ?, telefono = ?, email = ?, idmunicipio = ?, fechanac = ?, clave = ? WHERE cedula = ?";
+            $datos = array($this->nombres, $this->apellidos, $this->direccion, $this->telefono, $this->email, $this->municipio, $this->fechanac, $this->clave, $this->cedula);
+            $data = $this->save($sql, $datos);
+
+            // validar si se actualizo la informacion del usuario
             if ($data == 1) {
                 $data = "ok";
             } else {
