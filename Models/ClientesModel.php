@@ -32,7 +32,9 @@
                     c.email,
                     c.fechanac,
                     m.municipio,
-                    d.departamento
+                    m.idmunicipio,
+                    d.departamento,
+                    d.iddepto
                     FROM clientes c
                     JOIN municipios m 
                     ON
@@ -75,6 +77,42 @@
             }
             return $data;
         }
+
+        public function actualizarCliente(string $cedula, string $nombres, string $apellidos, string $direccion, string $telefono, string $email, string $municipio, string $fechanac)
+        {
+            // datos tabla usuarios
+            $this->cedula = $cedula;
+            $this->nombres = $nombres;
+            $this->apellidos = $apellidos;
+            $this->direccion = $direccion;
+            $this->telefono = $telefono;
+            $this->email = $email;
+            $this->municipio = $municipio;
+            $this->fechanac = $fechanac;
+
+            $sql = "UPDATE clientes
+            SET
+            nombres     = ?, 
+            apellidos   = ?, 
+            direccion   = ?, 
+            telefono    = ?, 
+            email       = ?, 
+            idmunicipio = ?, 
+            fechanac    = ?
+            WHERE cedula = ?";
+
+            $datos = array($this->nombres, $this->apellidos, $this->direccion, $this->telefono, $this->email, $this->municipio, $this->fechanac, $this->cedula);
+            $data = $this->save($sql, $datos);
+            
+            if ($data == 1) {
+                $data = "ok";
+            } else {
+                $data = "error";
+            }
+            return $data;
+        }
+
+
 
         public function getMunicipiosDepa($iddepto)
         {
