@@ -124,7 +124,7 @@
             $this->rol = 2; // 2 = empleado
 
             // Iniciar transacion
-            $this->startTransaction();
+            $this->startTransaction(); // begin
 
             // insertar datos tabla usuarios - U = usuarios
             $sqlU = "INSERT INTO usuarios(cedula, nombres, apellidos, direccion, telefono, email, idmunicipio, fechanac, usuario, clave) VALUES (?,?,?,?,?,?,?,?,?,?)";

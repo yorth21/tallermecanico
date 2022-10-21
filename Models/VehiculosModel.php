@@ -35,6 +35,7 @@
                     v.observacion,
                     v.estado,
                     v.propietario,
+                    v.tipovehiculo as idtipovehiculo,
                     tpv.tipovehiculo,
                     c.nombres,
                     c.apellidos
@@ -79,7 +80,36 @@
             $sql = "INSERT INTO vehiculos(placa, modelo, color, marca, observacion, propietario, tipovehiculo) VALUES (?,?,?,?,?,?,?)";
             $datos = array($this->placa, $this->modelo, $this->color, $this->marca, $this->observaciones, $this->propietario, $this->tipovehiculo);
             $data = $this->save($sql, $datos);
-            if ($data == true) {
+
+            if ($data == 1) {
+                $data = "ok";
+            } else {
+                $data = "error";
+            }
+
+            return $data;
+        }
+
+        public function editarVehiculo(string $placa, string $modelo, string $marca, string $color, string $tipovehiculo, string $observaciones)
+        {
+            // datos de la tabla usuarios
+            $this->placa = $placa;
+            $this->modelo = $modelo;
+            $this->marca = $marca;
+            $this->color = $color;
+            $this->tipovehiculo = $tipovehiculo;
+            $this->observaciones = $observaciones;
+
+            // si observaion esta vacio registra como null
+            if (empty($this->observaciones)) {
+                $this->observaciones = null;
+            }
+
+            $sql = "UPDATE vehiculos SET modelo=?, color=?, marca=?, observacion=?, tipovehiculo=? WHERE placa = ?";
+            $datos = array($this->modelo, $this->color, $this->marca, $this->observaciones, $this->tipovehiculo, $this->placa);
+            $data = $this->save($sql, $datos);
+
+            if ($data == 1) {
                 $data = "ok";
             } else {
                 $data = "error";

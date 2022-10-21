@@ -82,17 +82,23 @@ function buscarCliente(e) {
 const inputBuscar = document.getElementById('cedulaPropietario');
 $(inputBuscar).on('keyup', function () {
     let cedulaCliente = inputBuscar.value;
-    const url = base_url + "Vehiculos/buscadorClientes/"+cedulaCliente;
-    const http = new XMLHttpRequest();
-    http.open("GET", url, true);
-    http.send();
-    http.onreadystatechange = function(){
-        if (this.readyState == 4 && this.status == 200) {
-            const res = this.responseText;
-            if (res != "") {
-                document.getElementById("datosBuscadorClientes").innerHTML = res;
+    if (cedulaCliente != '') {
+        const url = base_url + "Vehiculos/buscadorClientes/"+cedulaCliente;
+        const http = new XMLHttpRequest();
+        http.open("GET", url, true);
+        http.send();
+        http.onreadystatechange = function(){
+            if (this.readyState == 4 && this.status == 200) {
+                const res = this.responseText;
+                if (res != "") {
+                    document.getElementById("datosBuscadorClientes").innerHTML = res;
+                } else {
+                    document.getElementById("datosBuscadorClientes").innerHTML = '';
+                }
             }
         }
+    } else {
+        document.getElementById("datosBuscadorClientes").innerHTML = '';
     }
 });
 
@@ -107,7 +113,6 @@ function frmRegistrarVehiculo(e) {
     e.preventDefault();
 
     validarVehiculo("observaciones");
-    console.log(campos2);
 
     //validaciones
     if(placa_v.value == "" || color_v.value == "" || modelo_v.value == "" || marca_v.value == "" || tipovehiculo_v.value == ""){
@@ -148,14 +153,47 @@ function frmRegistrarVehiculo(e) {
                     }
                 }
             }
-        }else{ 
+        }else{
             Swal.fire({
                 icon: 'error',
                 title: "Error, en los datos",
                 showConfirmButton: false,
                 timer: 3000
             })
-         }
+        }
+    }
+}
+
+function frmEditarVehiculo(e) {
+    e.preventDefault();
+
+    const url = base_url + "Vehiculos/editarVehiculo";
+    const frm = document.getElementById("frmEditarVehiculo");
+    const http = new XMLHttpRequest();
+    http.open("POST", url, true);
+    http.send(new FormData(frm));
+    http.onreadystatechange = function(){
+        if (this.readyState == 4 && this.status == 200) {
+            const res = this.responseText;
+            if (res == "ok") {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Cambios guardados con exito!',
+                    showConfirmButton: false,
+                    timer: 3000
+                })
+                setTimeout(() => {
+                    location.href = base_url + "Vehiculos/gestionVehiculos"
+                }, 2000);
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: res,
+                    showConfirmButton: false,
+                    timer: 3000
+                })
+            }
+        }
     }
 }
 

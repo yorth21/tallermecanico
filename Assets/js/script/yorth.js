@@ -216,3 +216,140 @@ function frmEditarEmpleado(e) {
 }
 
 // editar empleado
+
+// ==================================================================== //
+// Codigo para la seccion Facturar
+
+// tabla para mostrar las planillas disponibles a facturar
+let tblFacturarPlanilla;
+document.addEventListener("DOMContentLoaded", function () {
+    tblFacturarPlanilla = $('#tblFacturarPlanilla').DataTable({
+        "aaSorting": [],
+        ajax: {
+            url: base_url + 'Facturacion/listarPlanilla/1',
+            dataSrc: ''
+        },
+        columns: [
+            {
+                'data': 'nombres'
+            },
+            {
+                'data': 'placavehiculo'
+            },
+            {
+                'data': 'fechaingreso'
+            },
+            {
+                'data': 'fechaentrega'
+            },
+            {
+                'data': 'tipotrabajo'
+            },
+            {
+                'data': 'nomempleado'
+            },
+            {
+                'data': 'acciones'
+            }
+        ]
+    });
+});
+
+// buscador para agregar clientes
+
+function buscarProducto(e) {
+    e.preventDefault();
+    // mostrar el modal
+    $("#buscarProducto").modal("show");
+}
+
+// buscar cada que escriba en el input
+const inputBuscarProducto = document.getElementById('codNomProducto');
+$(inputBuscarProducto).on('keyup', function () {
+    let codNomProducto = inputBuscarProducto.value;
+    if (codNomProducto != '') {
+        const url = base_url + "Facturacion/buscadorProductos/"+codNomProducto;
+        const http = new XMLHttpRequest();
+        http.open("GET", url, true);
+        http.send();
+        http.onreadystatechange = function(){
+            if (this.readyState == 4 && this.status == 200) {
+                const res = this.responseText;
+                if (res != "") {
+                    document.getElementById("datosBuscadorProductos").innerHTML = res;
+
+                    // impedir digitar numeros con el teclado
+                    $("input.keydown").keydown(function() {
+                        return false
+                    });
+                } else {
+                    document.getElementById("datosBuscadorProductos").innerHTML = '';
+                }
+            }
+        }
+    } else {
+        document.getElementById("datosBuscadorProductos").innerHTML = '';
+    }
+});
+
+// Seleccionar producto agregar
+function btnAgregarProducto(codigoProd) {
+    // traer la cantidad del producto agregar
+    const idinput = 'producto-' + codigoProd;
+    const cantidadProd = document.getElementById(idinput).value;
+    // obtner el tbody
+    const tbody = document.getElementById("itemsAgregados");
+    // crear el item a agregar
+    const url = base_url + "Facturacion/agregarProducto/"+codigoProd;
+    const http = new XMLHttpRequest();
+    http.open("GET", url, true);
+    http.send();
+    http.onreadystatechange = function(){
+        if (this.readyState == 4 && this.status == 200) {
+            const res = JSON.parse(this.responseText);
+            if (res != "") {
+                // crear el tr para la tabla
+                var tr = document.createElement('tr');
+                const classTr = 'codigo-' + codigoProd;
+                tr.id = classTr;
+                const precioProd = res.precioventa * cantidadProd;
+                let html = '';
+                html += `
+                        <td><input type="text" class="form-control" name="codigo[]" value="${res.codigo}" readonly></td>
+                        <td><input type="text" class="form-control" value="${res.nombre}" readonly></td>
+                        <td><input type="text" class="form-control" value="${res.categoria}" readonly></td>
+                        <td><input type="text" class="form-control" name="cantidad[]" value="${cantidadProd}" readonly></td>
+                        <td><input type="text" class="form-control" name="precio[]" value="${precioProd}" readonly></td>
+                        <td><button class="btn btn-danger" type="button" onclick="btnBorrarItem('${classTr}');" title="Eliminar"><i class="fas fa-trash"></i></button></td>
+                        `;
+                tr.innerHTML = html;
+
+                // tbody.appendChild(res);
+                tbody.appendChild(tr);
+            }
+        }
+    }
+}
+
+// borrar items agregados
+function btnBorrarItem(classTr) {
+    $('#'+classTr).remove();
+}
+
+// agregar la forma de pago a credido
+const selectFormaPago = document.getElementById('formadepago');
+selectFormaPago.addEventListener("click", validarFormaPago);
+
+function validarFormaPago() {
+    // verificar si cumple condiciones
+    const tipotrabajo = document.getElementById('tipotrabajo').value;
+    const totalapagar = document.getElementById('totalapagar').value;
+    if (totalapagar != '') {
+        if (totalapagar >= 1000000 && tipotrabajo == 'Reparación') {
+            const option = `<option value="" selected>Seleccione...</option>
+                            <option value="1">Contado</option>
+                            <option value="2">Credito</option>`;
+            selectFormaPago.innerHTML = option;
+        }
+    }
+}

@@ -1226,3 +1226,7 @@ INSERT INTO `productos` (`codigo`, `nombre`, `categoria`, `fechaingreso`, `preci
 INSERT INTO `vehiculos`(`placa`, `modelo`, `color`, `marca`, `observacion`, `propietario`, `tipovehiculo`) VALUES ('ADA-123', '2022', 'rojo', 'renault', 'esta dañado', '33093429852', '2');
 INSERT INTO `vehiculos`(`placa`, `modelo`, `color`, `marca`, `observacion`, `propietario`, `tipovehiculo`) VALUES ('AFW-542', '1998', 'gris', 'chevrolet', 'esta buenisimo', '98793235736', '2');
 INSERT INTO `vehiculos`(`placa`, `modelo`, `color`, `marca`, `observacion`, `propietario`, `tipovehiculo`) VALUES ('GTH-478', '2002', 'verde', 'toyota', 'esta bueno', '89065643028', '3');
+
+-- insertar datos en la planilla de ingreso
+
+INSERT INTO `planillaingresos`(`cliente`, `fechaingreso`, `placavehiculo`, `descripciontrabajo`, `observacion`, `empleado`, `tipotrabajo`) VALUES ('33093429852', '2021-12-01', 'ADA-123', 'se le va hacer un mantenimiento', 'el carro le esta fallando la luz del freno', '987654321', '1');

@@ -213,7 +213,7 @@ ENGINE = InnoDB;
 -- Table `tallermecanicodb`.`planillaingresos`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `tallermecanicodb`.`planillaingresos` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `cliente` VARCHAR(20) NOT NULL,
   `fechaingreso` DATETIME NOT NULL,
   `fechaentrega` DATETIME NULL,
@@ -222,6 +222,7 @@ CREATE TABLE IF NOT EXISTS `tallermecanicodb`.`planillaingresos` (
   `observacion` TEXT(1000) NULL,
   `empleado` VARCHAR(20) NOT NULL,
   `tipotrabajo` INT NOT NULL,
+  `estado` INT NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   INDEX `fk_plantillaingresos_clientes1_idx` (`cliente` ASC) ,
   INDEX `fk_planillaingresos_empleados1_idx` (`empleado` ASC) ,
