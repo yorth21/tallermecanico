@@ -18,10 +18,10 @@
         </div>
     </div>
 
-    <form method="post" id="frmPlanilla">
+    <form method="post" id="frmFacturar">
         <!-- Inputs necesarios ocultos -->
-        <input class="" type="hidden" value="" id="planilla" name="planilla" value="<?php echo $data['id'];?>">
-        <input class="" type="hidden" value="" id="cajero" name="cajero" value="<?php echo $data['cedulacajero'];?>">
+        <input class="" type="hidden" id="planilla" name="planilla" value="<?php echo $data['id'];?>">
+        <input class="" type="hidden" id="cajero" name="cajero" value="<?php echo $data['cedulacajero'];?>">
         <!-- -------- -->
         <div class="row">
             <div class="co col-12 col-md-6">
@@ -167,9 +167,9 @@
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="mb-3">
-                                    <label for="cedula" class="form-label">Calcular descuento</label>
+                                    <label for="descuento" class="form-label">Calcular descuento</label>
                                     <div class="input-group mb-3">
-                                        <input type="text" class="form-control" name="cedula" id="cedula" aria-label="cedula" aria-describedby="button-search" placeholder="Descuento (%)" readonly>
+                                        <input type="text" class="form-control" name="descuento" id="descuento" aria-label="descuento" aria-describedby="button-search" placeholder="Descuento (%)" readonly>
                                         <button class="btn btn-primary" type="button" id="button-search" onclick="calcularDescuento(event);"><i class="fas fa-sync-alt"></i></button>
                                     </div>
                                 </div>
@@ -195,6 +195,13 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <div class="row d-flex justify-content-evenly mb-5">
+            <div class="col-12 col-md-4 d-flex justify-content-evenly">
+                <a class="btn btn-danger" href="<?php echo base_url; ?>Vehiculos/gestionVehiculos">Cancelar</a>
+                <button class="btn btn-primary" type="button" onclick="frmRegistrarFactura(event);">Registrar factura</button>
             </div>
         </div>
     </form>

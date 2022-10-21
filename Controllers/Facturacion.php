@@ -96,6 +96,44 @@
             die();
         }
 
+        public function registrarFactura()
+        {
+            $this->session();
+            // facha de registro
+            date_default_timezone_set("America/Bogota");
+            $fecha = date('Y-m-d h:i:s');
+
+            // datos de la tabla facturas
+            $numfactura = $_POST['numfactura'];
+            $cajero = $_SESSION['cedula'];
+            $planilla = $_POST['planilla'];
+            $totalapagar = $_POST['totalapagar'];
+            $descuentos = 0;
+            $observacion = '';
+            $formadepago = $_POST['formadepago'];
+
+            // Arrays para la tabla productos
+            $codigoProd = $_POST['codigo'];
+            $cantidadProd = $_POST['cantidad'];
+
+            // Validar campos importantes no esten vacios
+            if (empty($numfactura) || empty($cajero) || empty($planilla)   || empty($totalapagar) || empty($formadepago)) {
+                $msg = "Completa todos los campos";
+            } else {
+                // enviar datos al modelo para registrar en la base de datos
+                $data = $this->model->registrarFactura($numfactura, $fecha, $cajero, $planilla, $totalapagar, $descuentos, $observacion, $formadepago, $codigoProd, $cantidadProd);
+                // validar si se registro la factura con exito
+                if ($data == "ok") {
+                    $msg = "ok";
+                } else {
+                    $msg = "No se registro el usuario";
+                }
+            }
+
+            echo $msg;
+            die();
+        }
+
     }
 
 ?>

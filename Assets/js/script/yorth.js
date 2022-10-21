@@ -361,5 +361,48 @@ function calcularTotalPagar(e) {
             timer: 2000
         })
     }
+}
 
+// Registrar factura
+function frmRegistrarFactura(e) {
+    e.preventDefault();
+    const url = base_url + "Facturacion/registrarFactura";
+    const frm = document.getElementById("frmFacturar");
+    const http = new XMLHttpRequest();
+    http.open("POST", url, true);
+    http.send(new FormData(frm));
+    http.onreadystatechange = function(){
+        if (this.readyState == 4 && this.status == 200) {
+            const res = this.responseText;
+            if (res == "ok") {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Factura registrada con exito!',
+                    showConfirmButton: false,
+                    timer: 3000
+                })
+                frm.reset();
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: res,
+                    showConfirmButton: false,
+                    timer: 3000
+                })
+            }
+        }
+    }
+}
+
+// calcular descuento
+
+function calcularDescuento(e) {
+    e.preventDefault();
+
+    Swal.fire({
+        icon: 'info',
+        title: 'Boton en desarrollo',
+        showConfirmButton: false,
+        timer: 3000
+    })
 }
