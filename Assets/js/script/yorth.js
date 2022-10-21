@@ -319,7 +319,7 @@ function btnAgregarProducto(codigoProd) {
                         <td><input type="text" class="form-control" value="${res.nombre}" readonly></td>
                         <td><input type="text" class="form-control" value="${res.categoria}" readonly></td>
                         <td><input type="text" class="form-control" name="cantidad[]" value="${cantidadProd}" readonly></td>
-                        <td><input type="text" class="form-control" name="precio[]" value="${precioProd}" readonly></td>
+                        <td><input type="text" class="form-control inputPrecioProd" name="precio[]" value="${precioProd}" readonly></td>
                         <td><button class="btn btn-danger" type="button" onclick="btnBorrarItem('${classTr}');" title="Eliminar"><i class="fas fa-trash"></i></button></td>
                         `;
                 tr.innerHTML = html;
@@ -336,20 +336,30 @@ function btnBorrarItem(classTr) {
     $('#'+classTr).remove();
 }
 
-// agregar la forma de pago a credido
-const selectFormaPago = document.getElementById('formadepago');
-selectFormaPago.addEventListener("click", validarFormaPago);
+// calcular total a pagar
+function calcularTotalPagar(e) {
+    e.preventDefault();
 
-function validarFormaPago() {
-    // verificar si cumple condiciones
-    const tipotrabajo = document.getElementById('tipotrabajo').value;
-    const totalapagar = document.getElementById('totalapagar').value;
-    if (totalapagar != '') {
-        if (totalapagar >= 1000000 && tipotrabajo == 'Reparación') {
-            const option = `<option value="" selected>Seleccione...</option>
-                            <option value="1">Contado</option>
-                            <option value="2">Credito</option>`;
-            selectFormaPago.innerHTML = option;
-        }
+    var arrayPrecios = new Array();
+    var inputsPrecios = document.getElementsByClassName('inputPrecioProd'),
+    namesValues = [].map.call(inputsPrecios, function (dataInput) {
+        arrayPrecios.push(dataInput.value);
+    });
+    var totalProductos = 0;
+    arrayPrecios.forEach(function (inputsValuesData) {
+        totalProductos += +inputsValuesData;
+    });
+    var manoobra = document.getElementById('manoobra').value;
+    if (manoobra) {
+        var totalPagar = +manoobra + totalProductos;
+        document.getElementById('totalapagar').value = totalPagar;
+    } else {
+        Swal.fire({
+            icon: 'error',
+            title: 'Digitar el valor de mano de obra',
+            showConfirmButton: false,
+            timer: 2000
+        })
     }
+
 }

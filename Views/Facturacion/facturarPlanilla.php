@@ -179,7 +179,10 @@
                             <div class="col-12 col-md-6">
                                 <div class="mb-3">
                                     <label for="totalapagar" class="form-label">Total a pagar</label>
-                                    <input type="text" class="form-control" name="totalapagar" id="totalapagar" readonly>
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" name="totalapagar" id="totalapagar" aria-label="totalapagar" aria-describedby="button-search" placeholder="Total a pagar" readonly>
+                                        <button class="btn btn-primary" type="button" id="button-search" title="Calcular total a pagar" onclick="calcularTotalPagar(event);"><i class="fas fa-sync-alt"></i></button>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
@@ -229,5 +232,25 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // agregar la forma de pago a credido
+        const selectFormaPago = document.getElementById('formadepago');
+        selectFormaPago.addEventListener("click", validarFormaPago);
+
+        function validarFormaPago() {
+            // verificar si cumple condiciones
+            const tipotrabajo = document.getElementById('tipotrabajo').value;
+            const totalapagar = document.getElementById('totalapagar').value;
+            if (totalapagar != '') {
+                if (totalapagar >= 1000000 && tipotrabajo == 'Reparación') {
+                    const option = `<option value="" selected>Seleccione...</option>
+                                    <option value="1">Contado</option>
+                                    <option value="2">Credito</option>`;
+                    selectFormaPago.innerHTML = option;
+                }
+            }
+        }
+    </script>
 
 <?php include "Views/Templates/footer.php"; ?>
