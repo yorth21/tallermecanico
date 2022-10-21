@@ -75,9 +75,12 @@ function frmActualizarCliente(e) {
                     icon: 'success',
                     title: 'Cliente actualizado con exito',
                     showConfirmButton: false,
-                    timer: 3000
+                    timer: 2000
                 })
-                frm.reset();
+                /*Redireccionar */
+                setTimeout(() => {
+                    location.href = base_url + "Clientes/gestionClientes"
+                }, 2000);
             } else {
                 Swal.fire({
                     icon: 'error',
